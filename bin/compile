@@ -45,6 +45,10 @@ then arch=amd64
 fi
 plat=$(uname|tr A-Z a-z)-$arch
 
+#echo "-----> remove gohperjs items, they are not used on heroku"
+#rm -rf $build/pages
+#find $build/static -name \*.js.map -exec rm {} \;
+
 # Python
 venv=$cache/venv
 mkdir -p $cache/pip
@@ -143,7 +147,7 @@ then
 fi
 
 FLAGS=(-tags heroku)
-if test -n "$GO_GIT_DESCRIBE_SYMBOL"
+if test -f "$env_dir/GO_GIT_DESCRIBE_SYMBOL"
 then
     git_describe=$(git describe --tags --always)
     FLAGS=(${FLAGS[@]} -ldflags "-X $GO_GIT_DESCRIBE_SYMBOL $git_describe")
@@ -164,3 +168,9 @@ rm -rf $build/.heroku
 
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
+
+echo -n "-----> trying to build the client side code and web pages.... "
+pushd $build/pages
+make
+popd
+
