@@ -166,7 +166,6 @@ else
     go get "${FLAGS[@]}" ./...
 fi
 
-echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
 echo "-----> Trying to build the client-side code and web pages.... "
 export PATH=$PATH:$build/bin
 export GOPATH=`godep path`
@@ -180,4 +179,5 @@ popd
 rm -rf $build/.heroku
 
 mkdir -p $build/.profile.d
+echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
 
