@@ -160,23 +160,24 @@ then
     echo "-----> Running: godep go install ${FLAGS[@]} ./..."
     godep go install "${FLAGS[@]}" ./...
     echo "-----> Installing gopherjs"
-    godep go install github.com/gopherjs/gopherjs
-    ls -l $build
-    ls -l $build/bin
+    godep go install github.com/gopherjs/gopherjs    
 else
     echo "-----> Running: go get ${FLAGS[@]} ./..."
     go get "${FLAGS[@]}" ./...
 fi
 
-rm -rf $build/.heroku
-
-mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
-
 echo "-----> Trying to build the client-side code and web pages.... "
 export PATH=$PATH:$build/bin
+export GOPATH=`godep path`
 echo "path is now $PATH"
+echo "gopath is now $GOPATH"
+
 pushd $build/pages
 make
 popd
+
+rm -rf $build/.heroku
+
+mkdir -p $build/.profile.d
 
