@@ -169,10 +169,13 @@ rm -rf $build/.heroku
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
 
-echo "-----> trying to build the client side code and web pages.... "
+echo "-----b> $build"
+ls -l $build
+echo "-----c> $cache"
+ls -l $cache
+echo "-----> trying to build the client-side code and web pages.... "
 pushd $build/pages
-echo "----> in $PWD"
 make
-echo "----> leaving $PWD"
+echo "----> done building client-side"
 popd
 
