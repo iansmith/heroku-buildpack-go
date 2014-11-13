@@ -160,9 +160,7 @@ then
     echo "-----> Running: godep go install ${FLAGS[@]} ./..."
     godep go install "${FLAGS[@]}" ./...
     echo "-----> Installing gopherjs"
-    godep go install github.com/gopherjs/gopherjs
-    godep path
-    ls -l `godep path`
+    godep go get github.com/gopherjs/gopherjs
 else
     echo "-----> Running: go get ${FLAGS[@]} ./..."
     go get "${FLAGS[@]}" ./...
