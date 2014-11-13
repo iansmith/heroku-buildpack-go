@@ -172,8 +172,8 @@ mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
 
 echo "-----> Trying to build the client-side code and web pages.... "
-pushd $build/pages
-make
+#pushd $build/pages
+#make
 echo "----> done building client-side"
-popd
+#popd
 
