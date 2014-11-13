@@ -160,7 +160,11 @@ then
     echo "-----> Running: godep go install ${FLAGS[@]} ./..."
     godep go install "${FLAGS[@]}" ./...
     echo "-----> Installing gopherjs"
-    godep go install github.com/gopherjs/gopherjs    
+    godep go install github.com/gopherjs/gopherjs  
+    echo "-----> Fixing up the linking of iansmith/selma"
+    mkdir -p `godep path`/src/github.com/iansmith
+    ls -l `godep path`/src/github.com/iansmith
+    ln -s $build `godep path`/src/github.com/iansmith/selma
 else
     echo "-----> Running: go get ${FLAGS[@]} ./..."
     go get "${FLAGS[@]}" ./...
@@ -168,7 +172,7 @@ fi
 
 echo "-----> Trying to build the client-side code and web pages.... "
 export PATH=$PATH:$build/bin
-export GOPATH=`godep path`:$build
+export GOPATH=`godep path`
 echo "computed gopath $GOPATH"
 pushd $build/pages
 make
