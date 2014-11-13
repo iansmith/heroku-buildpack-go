@@ -169,10 +169,14 @@ rm -rf $build/.heroku
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
 
-echo "-----b> $build"
-ls -l $build
-echo "-----c> $cache"
-ls -l $cache
+if [ ! -f "$cache/gopherjs" ]
+then
+    echo "-----> installing gopherjs"
+    go install github.com/gopherjs/gopherjs
+    cp `which gopherjs` $cache
+    echo "-----> copied gopherjs to cache `which gopherjs`"
+fi
+
 echo "-----> trying to build the client-side code and web pages.... "
 pushd $build/pages
 make
