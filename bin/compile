@@ -168,10 +168,8 @@ fi
 
 echo "-----> Trying to build the client-side code and web pages.... "
 export PATH=$PATH:$build/bin
-export GOPATH=`godep path`
-echo "path is now $PATH"
-echo "gopath is now $GOPATH"
-
+export GOPATH=`godep path`:$build
+echo "computed gopath $GOPATH"
 pushd $build/pages
 make
 popd
