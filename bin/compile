@@ -159,7 +159,7 @@ if test -e $build/Godeps
 then
     echo "-----> Running: godep go install ${FLAGS[@]} ./..."
     godep go install "${FLAGS[@]}" ./...
-    echo "-----> installing gopherjs"
+    echo "-----> Installing gopherjs"
     godep go install github.com/gopherjs/gopherjs
 else
     echo "-----> Running: go get ${FLAGS[@]} ./..."
@@ -171,7 +171,8 @@ rm -rf $build/.heroku
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
 
-echo "-----> trying to build the client-side code and web pages.... "
+echo "-----> Trying to build the client-side code and web pages.... "
+godep path
 pushd $build/pages
 make
 echo "----> done building client-side"
