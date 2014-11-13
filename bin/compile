@@ -172,7 +172,7 @@ echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
 if [ ! -f "$cache/gopherjs" ]
 then
     echo "-----> installing gopherjs"
-    godep go install github.com/gopherjs/gopherjs
+    go get github.com/gopherjs/gopherjs
     cp `which gopherjs` $cache
     echo "-----> copied gopherjs to cache `which gopherjs`"
 fi
