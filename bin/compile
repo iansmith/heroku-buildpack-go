@@ -161,6 +161,8 @@ then
     godep go install "${FLAGS[@]}" ./...
     echo "-----> Installing gopherjs"
     godep go install github.com/gopherjs/gopherjs
+    ls -l $build
+    ls -l $build/bin
 else
     echo "-----> Running: go get ${FLAGS[@]} ./..."
     go get "${FLAGS[@]}" ./...
@@ -172,7 +174,8 @@ mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
 
 echo "-----> Trying to build the client-side code and web pages.... "
-export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$build/bin
+echo "path is now $PATH"
 pushd $build/pages
 make
 popd
