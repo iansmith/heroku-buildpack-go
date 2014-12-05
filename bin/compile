@@ -108,15 +108,15 @@ PATH=$GOROOT/bin:$PATH
 
 echo "-----> Installing gopherjs into $cache"
 SAVE="$GOPATH"
-GOPATH=$cache/gopherjs export GOPATH
-if test ! -d $cache/gopherjs; then
-    mkdir -p $cache/gopherjs/bin
-    mkdir -p $cache/gopherjs/src
+GOPATH=$build/.gopherjs export GOPATH
+if test ! -d $build/.gopherjs; then
+    mkdir -p $build/.gopherjs/bin
+    mkdir -p $build/.gopherjs/src
     go get github.com/gopherjs/gopherjs
 else
     go get -u github.com/gopherjs/gopherjs
 fi
-PATH=$cache/gopherjs/bin:$PATH
+PATH=$build/.gopherjs/bin:$PATH
 echo "-----> path ok?" `which gopherjs`
 GOPATH="$SAVE" export GOPATH
 
@@ -193,6 +193,7 @@ make
 popd
 
 rm -rf $build/.heroku
+rm -rf $build/.gopherjs
 
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
