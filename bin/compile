@@ -100,15 +100,16 @@ else
     echo " done"
 fi
 
-echo "-----> Installing gopherjs"
-go get github.com/gopherjs/gopherjs
-echo "-----> path ok?" `which gopherjs`
-
 mkdir -p $build/bin
 GOBIN=$build/bin export GOBIN
 GOROOT=$cache/$ver/go export GOROOT
 GOPATH=$build/.heroku/g export GOPATH
 PATH=$GOROOT/bin:$PATH
+
+echo "-----> Installing gopherjs"
+go get github.com/gopherjs/gopherjs
+echo "-----> path ok?" `which gopherjs`
+
 
 
 if ! (test -d $build/Godeps || (which hg >/dev/null && which bzr >/dev/null))
