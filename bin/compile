@@ -100,6 +100,10 @@ else
     echo " done"
 fi
 
+echo "-----> Installing gopherjs"
+go get github.com/gopherjs/gopherjs
+echo "-----> path ok?" `which gopherjs`
+
 mkdir -p $build/bin
 GOBIN=$build/bin export GOBIN
 GOROOT=$cache/$ver/go export GOROOT
