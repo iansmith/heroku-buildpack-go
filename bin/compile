@@ -107,9 +107,17 @@ GOPATH=$build/.heroku/g export GOPATH
 PATH=$GOROOT/bin:$PATH
 
 echo "-----> Installing gopherjs"
-go get github.com/gopherjs/gopherjs
-echo "-----> path ok?" `which gopherjs`
+SAVE="$GOPATH"
+if test ! -d $cache/gopherjs; then
+    mkdir -p $cache/gopherjs/bin
+    mkdir -p $cache/gopherjs/src
+    GOPATH=$cache/gopherjs
+    go get github.com/gopherjs/gopherjs
+fi
 
+PATH=$cache/gopherjs/bin:$PATH
+echo "-----> path ok?" `which gopherjs`
+GOPATH="$SAVE"
 
 
 if ! (test -d $build/Godeps || (which hg >/dev/null && which bzr >/dev/null))
