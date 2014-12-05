@@ -106,10 +106,6 @@ GOROOT=$cache/$ver/go export GOROOT
 GOPATH=$build/.heroku/g export GOPATH
 PATH=$GOROOT/bin:$PATH
 
-echo "pwd is" `pwd`
-echo "go is " `which go`
-go get -u github.com/gopherjs/gopherjs
-
 if ! (test -d $build/Godeps || (which hg >/dev/null && which bzr >/dev/null))
 then
     echo
