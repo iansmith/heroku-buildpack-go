@@ -106,18 +106,19 @@ GOROOT=$cache/$ver/go export GOROOT
 GOPATH=$build/.heroku/g export GOPATH
 PATH=$GOROOT/bin:$PATH
 
-echo "-----> Installing gopherjs"
+echo "-----> Installing gopherjs into $cache"
 SAVE="$GOPATH"
+GOPATH=$cache/gopherjs export GOPATH
 if test ! -d $cache/gopherjs; then
     mkdir -p $cache/gopherjs/bin
     mkdir -p $cache/gopherjs/src
-    GOPATH=$cache/gopherjs
     go get github.com/gopherjs/gopherjs
+else
+    go get -u github.com/gopherjs/gopherjs
 fi
-
 PATH=$cache/gopherjs/bin:$PATH
 echo "-----> path ok?" `which gopherjs`
-GOPATH="$SAVE"
+GOPATH="$SAVE" export GOPATH
 
 
 if ! (test -d $build/Godeps || (which hg >/dev/null && which bzr >/dev/null))
