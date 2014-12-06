@@ -174,11 +174,12 @@ export PATH=$PATH:$build/bin
 export GOPATH=`godep path`
 echo "computed gopath $GOPATH"
 pushd $build/pages
+echo "working dir is $build"
+echo "ls of the dir `ls ../../../seven5/seven5/client`"
 make
 popd
 
 rm -rf $build/.heroku
-rm -rf $build/.gopherjs
 
 mkdir -p $build/.profile.d
 echo 'PATH=$PATH:$HOME/bin' > $build/.profile.d/go.sh
